@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadinGames - Story Reader</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../loggedin/loggedin.css">
+    <link rel="stylesheet" href="reader.css">
+</head>
+<body>
+    
+    <div id="loggedin">
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="/public/loggedin/"><img src="ReadinGames.png" alt="Home Page button"></a></li>
+                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
+                <li class="nav-item"><a href="/public/loggedin/games">Games</a></li>
+                <li class="nav-item"><a href="/public/loggedin/merges">Merges</a></li>
+                <li class="nav-item"><a href="/public/loggedin/favourites">Exercise</a></li>
+                <li class="nav-item"><a href="/public/loggedin/submit">Submit</a></li>
+                <li class="nav-item"><a href="/public/loggedin/profile"><img src="defaultpfp.png" alt="Profile Picture">Profile</a></li>
+            </ul>
+        </nav>
+        
+        <div id="home-view" class="view">
+            
+            <div id="reader-container">
+                <div id="story-loading-overlay" class="loader-overlay">
+                    <object data="loading.svg" type="image/svg+xml" class="loading-svg"></object>
+                </div>
+
+                <div id="story-header">
+                    <button id="back-btn">&lt; Back</button>
+                    <h1 id="story-title"></h1>
+                    <span id="story-difficulty"></span>
+                </div>
+                <div id="story-content"></div>
+            </div>
+
+            <div id="seperator"></div>
+
+            <div id="questions">
+                <div id="questions-loading-overlay" class="loader-overlay">
+                    <object data="loading.svg" type="image/svg+xml" class="loading-svg"></object>
+                </div>
+
+                <!-- Active Question View -->
+                <div id="quiz-section">
+                    <h1 id="question-title">Question 1</h1>
+                    <p id="question">Loading your questions...</p>
+                    
+                    <div id="options-grid">
+                        <button class="option-btn" id="option1"></button>
+                        <button class="option-btn" id="option2"></button>
+                        <button class="option-btn" id="option3"></button>
+                        <button class="option-btn" id="option4"></button>
+                    </div>
+
+                    <button id="submit-answer-btn">Submit Answer</button>
+
+                    <div id="progress-bar-container">
+                        <div id="progress-bar"></div>
+                    </div>
+                </div>
+
+                <!-- Final Score View -->
+                <div id="final-score-screen" class="hidden">
+                    <h1>Assessment Complete!</h1>
+                    <p>Your Score: <span id="final-score-text">0/0</span></p>
+                    <button id="return-home-btn">Return to Menu</button>
+                </div>
+
+                <div class="toolbox-container">
+                    <button class="toolbox-toggle" id="toolbox-btn" aria-label="Toggle Tool Box">Tools ▾</button>
+
+                    <div class="toolbox-panel" id="toolbox-panel">
+                        <button class="tool-item" data-tool="highlight"><img src="highlight.png" alt="Highlight">Highlight</button>
+                        <button class="tool-item" data-tool="eraser"><img src="eraser.png" alt="Eraser">Eraser</button> 
+                        <button class="tool-item" data-tool="underline"><img src="underline.png" alt="Underline">Underline</button>
+                        <button class="tool-item" data-tool="vocab"><img src="add.png" alt="Add">Add To Vocab</button>
+                        <button class="tool-item" data-tool="notes"><img src="note.png" alt="Notes">Add Note</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="hidden">Saved to vocabulary!</div>
+
+    <script src="reader.js" type="module"></script>
+</body>
+</html>

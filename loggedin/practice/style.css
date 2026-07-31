@@ -1,0 +1,227 @@
+:root {
+    --accent: rgb(0, 175, 38);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: #ddd;
+    font-family: 'ADLaM Display', cursive;
+    overflow: hidden;
+}
+
+#loggedin {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #ccc;
+    border-bottom: 4px solid var(--accent); /* 5px * 0.8 */
+    padding: 12px 32px; /* 15px 40px * 0.8 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: underline;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+/* Navbar Items & Underlines */
+.nav-item {
+    font-family: 'Jaini', cursive;
+    font-size: 30px; /* 38px * 0.8 */
+    color: black;
+    margin: 0 20px; /* 25px * 0.8 */
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 4px 8px; /* 5px 10px * 0.8 */
+    border: 2px solid transparent; /* 3px * 0.8 */
+    border-radius: 8px; /* 10px * 0.8 */
+}
+
+.nav-item:hover {
+    color: var(--accent);
+}
+
+/* Active Page Highlight for Practice View */
+.active-page {
+    border-color: var(--accent);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Logo on the far left */
+.nav-item:first-child {
+    margin-right: auto;
+    border: 2px solid transparent;
+}
+
+.active-page:first-child {
+    border-color: var(--accent);
+}
+
+.nav-item:first-child img {
+    height: 56px; /* 70px * 0.8 */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Profile on the far right */
+.nav-item:last-child {
+    margin-left: 24px; /* 30px * 0.8 */
+    margin-right: 8px; /* 10px * 0.8 */
+    font-family: 'ADLaM Display', cursive;
+    font-size: 24px; /* 30px * 0.8 */
+    gap: 12px; /* 15px * 0.8 */
+}
+
+.nav-item:last-child img {
+    width: 52px; /* 65px * 0.8 */
+    height: 52px; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Main Practice View Layout */
+#home-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20%;
+    flex-grow: 1;
+    padding: 32px; /* 40px * 0.8 */
+}
+
+/* Find Problems Box */
+#finder {
+    background: white;
+    border: 3px solid #bbb; /* 4px * 0.8 */
+    border-radius: 12px; /* 15px * 0.8 */
+    padding: 24px; /* 30px * 0.8 */
+    width: 352px; /* 440px * 0.8 */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* 15px * 0.8 */
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1); /* 4px 4px * 0.8 */
+}
+
+#finder h1 {
+    font-size: 36px; /* 45px * 0.8 */
+    color: black;
+    margin: 0 0 8px 0; /* 10px * 0.8 */
+}
+
+#finder input[type="text"],
+#finder select {
+    width: 100%;
+    padding: 10px 12px; /* 12px 15px * 0.8 */
+    border: 2px solid var(--accent); /* 3px * 0.8 */
+    border-radius: 6px; /* 8px * 0.8 */
+    font-family: 'Jaini', cursive;
+    font-size: 24px; /* 30px * 0.8 */
+    box-sizing: border-box;
+    background: white;
+    color: black;
+}
+
+#finder input[type="text"]:focus,
+#finder select:focus {
+    outline: none;
+}
+
+#category {
+    font-family: 'Jaini', cursive;
+    font-size: 24px; /* 30px * 0.8 */
+    color: black;
+    margin-top: 4px; /* 5px * 0.8 */
+    margin-bottom: -8px; /* -10px * 0.8 */
+}
+
+#search {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px; /* 15px * 0.8 */
+    border-radius: 16px; /* 20px * 0.8 */
+    font-size: 1.6rem; /* 2rem * 0.8 */
+    font-family: 'ADLaM Display', cursive;
+    cursor: pointer;
+    margin-top: 12px; /* 15px * 0.8 */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#search:hover {
+    background-color: white;
+    color: var(--accent);
+    border: 2px solid var(--accent); /* 3px * 0.8 */
+}
+
+/* Readings Section */
+#Readings {
+    position: relative; /* CRITICAL: This traps the absolute loading overlay inside the box */
+    background: white;
+    border: 3px solid #bbb; /* 4px * 0.8 */
+    border-radius: 12px; /* 15px * 0.8 */
+    padding: 24px; /* 30px * 0.8 */
+    width: 544px; /* 680px * 0.8 */
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1); /* 4px 4px * 0.8 */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#Readings h1 {
+    font-size: 44px; /* 55px * 0.8 */
+    color: black;
+    margin-bottom: 16px; /* 20px * 0.8 */
+    margin-top: 0;
+}
+
+#readingslist {
+    list-style: none;
+    padding: 0; /* Updated to 0 per your duplicate override */
+    margin: 0;
+    height: 304px; /* 380px * 0.8 */
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#readingslist li {
+    font-family: 'Jaini', cursive;
+    font-size: 27px; /* 34px * 0.8 */
+    padding: 10px 0; /* 12px * 0.8 */
+    border-bottom: 2px dashed #ddd;
+}
+
+#loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /* Forces it to sit on top of the list items */
+    pointer-events: none;
+}
+
+#loading-svg {
+    width: 400px; /* 500px * 0.8 */
+    height: 400px; /* 500px * 0.8 */
+    object-fit: contain;
+    pointer-events: none;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadinGames</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loggedin">
+        <nav>
+            <ul>
+                <li class="nav-item active-page">
+                    <a href="/public/loggedin/"><img src="ReadinGames.png" alt="Home Page button"></a>
+                </li>
+                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
+                <li class="nav-item"><a href="/public/loggedin/games">Games</a></li>
+                <li class="nav-item"><a href="/public/loggedin/merges">Merges</a></li>
+                <li class="nav-item"><a href="/public/loggedin/favourites">Favourites</a></li>
+                <li class="nav-item"><a href="/public/loggedin/submit">Submit</a></li>
+                <li class="nav-item"><a href="/public/loggedin/profile"><img src="defaultpfp.png" alt="Profile Picture">Profile</a></li>
+            </ul>
+        </nav>
+        
+        <div id="home-view" class="view">
+            <div id="finder">
+                <h1>Find Problems</h1>
+                <input type="text" id="grade">
+                <label for="categories" id="category">Category:</label>
+                <select name="categories" id="cars">
+                <option value="main-idea">Main Idea</option>
+                <option value="theme">Theme</option>
+                <option value="inference">Inference</option>
+                <option value="volcabulary-in-context">Volcabulary in Context</option>
+                <option value="author's-purpose">Author's Purpose</option>
+                <option value="point-of-view">Point of View</option>
+                <option value="supporting-evidence">Supporting Evidence</option>
+                <option value="character-traits">Character Traits</option>
+                <option value="cause-and-effect">Cause and Effect</option>
+                <option value="sequence-of-events">Sequence of Events</option>
+                </select>
+                <input type="text" id="keyword">
+                <button id="search">Search</button>
+            </div>
+            
+            <div id="Readings">
+                <h1>Readings</h1>
+                <div id="readings-wrapper" style="position: relative;">
+                    <!-- Loading overlay is now a sibling to the list, trapped inside the wrapper box -->
+                    <div id="loading-overlay">
+                        <object data="loading.svg" type="image/svg+xml" id="loading-svg"></object>
+                    </div>
+                    <ul id="readingslist"></ul>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>

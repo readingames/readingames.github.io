@@ -1,0 +1,262 @@
+:root {
+    --accent: rgb(0, 175, 38);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: #ddd;
+    font-family: 'ADLaM Display', cursive;
+    overflow: hidden;
+}
+
+#loggedin {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #ccc;
+    border-bottom: 4px solid var(--accent); /* 5px * 0.8 */
+    padding: 12px 32px; /* 15px 40px * 0.8 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: underline;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+/* Navbar Items & Underlines */
+.nav-item {
+    font-family: 'Jaini', cursive;
+    font-size: 30px; /* 38px * 0.8 */
+    color: black;
+    margin: 0 20px; /* 25px * 0.8 */
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 4px 8px; /* 5px 10px * 0.8 */
+    border: 2px solid transparent; /* 3px * 0.8 */
+    border-radius: 8px; /* 10px * 0.8 */
+}
+
+.nav-item:hover {
+    color: var(--accent);
+}
+
+/* Active Page Highlight (Different Border Color) */
+.active-page {
+    border-color: rgb(0, 175, 38);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Logo on the far left */
+.nav-item:first-child {
+    margin-right: auto;
+    border: 2px solid transparent;
+}
+
+.active-page:first-child {
+    border-color: rgb(0, 175, 38);
+}
+
+.nav-item:first-child img {
+    height: 56px; /* 70px * 0.8 */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Profile on the far right */
+.nav-item:last-child {
+    margin-left: 24px; /* 30px * 0.8 */
+    margin-right: 8px; /* 10px * 0.8 */
+    font-family: 'ADLaM Display', cursive;
+    font-size: 24px; /* 30px * 0.8 */
+    gap: 12px; /* 15px * 0.8 */
+}
+
+.nav-item:last-child img {
+    width: 52px; /* 65px * 0.8 */
+    height: 52px; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Main Dashboard View Layout */
+#home-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20%;
+    flex-grow: 1;
+    padding: 32px; /* 40px * 0.8 */
+}
+
+/* Left Side Cards Container */
+#left-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 25px * 0.8 */
+    width: 336px; /* 420px * 0.8 */
+}
+
+/* Individual Clickable Dashboard Cards */
+.dashboard-card {
+    background: white;
+    border: 3px solid #bbb; /* 4px * 0.8 */
+    border-radius: 10px; /* 12px * 0.8 */
+    padding: 18px 24px; /* 22px 30px * 0.8 */
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    text-decoration: none;
+    color: black;
+    font-size: 32px; /* 40px * 0.8 */
+    font-family: 'ADLaM Display', cursive;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1); /* 4px 4px * 0.8 */
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    transform: scale(1.15);
+    margin-bottom: 2%;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px) scale(1.1);
+    border-color: var(--accent);
+}
+
+.dashboard-card img {
+    width: 40px; /* 50px * 0.8 */
+    height: 40px;
+    object-fit: contain;
+}
+
+/* Recommendations Section */
+#recommend {
+    display: flex;
+    flex-direction: column;
+    width: 544px; /* 680px * 0.8 */
+    position: relative;
+}
+
+#recommend h1 {
+    font-size: 44px; /* 55px * 0.8 */
+    color: black;
+    margin-bottom: 16px; /* 20px * 0.8 */
+    position: relative;
+    background: white;
+    border: 3px solid #bbb;
+    border-radius: 12px; /* 15px * 0.8 */
+    padding: 24px; /* 30px * 0.8 */
+    width: 544px; /* 680px * 0.8 */
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#recommendation-list {
+    list-style: none;
+    padding: 20px; /* 25px * 0.8 */
+    margin: 0;
+    background: white;
+    height: 304px; /* 380px * 0.8 */
+    border: 3px solid #bbb;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border-radius: 10px; /* 12px * 0.8 */
+}
+
+#recommendation-list li {
+    font-family: 'Jaini', cursive;
+    font-size: 27px; /* 34px * 0.8 */
+    padding: 10px 0; /* 12px * 0.8 */
+    border-bottom: 2px dashed #ddd;
+}
+
+#reader-container {
+    position: relative;
+    background: white;
+    border: 3px solid #bbb;
+    border-radius: 12px;
+    padding: 32px; /* 40px * 0.8 */
+    width: 720px; /* 900px * 0.8 */
+    min-height: 480px; /* 600px * 0.8 */
+    max-height: 75vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* 20px * 0.8 */
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+#loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    pointer-events: none;
+}
+
+#loading-svg {
+    width: 400px; /* 500px * 0.8 */
+    height: 400px;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 999;
+}
+
+#story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed #ddd;
+    padding-bottom: 12px; /* 15px * 0.8 */
+}
+
+#story-title {
+    font-size: 34px; /* 42px * 0.8 */
+    color: black;
+    margin: 0;
+}
+
+#story-difficulty {
+    font-family: 'Jaini', cursive;
+    font-size: 26px; /* 32px * 0.8 */
+}
+
+#story-content {
+    font-family: 'Jaini', cursive;
+    font-size: 21px; /* 26px * 0.8 */
+    color: #333;
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Class added via JS to fade out smoothly */
+.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#loadingtext {
+    color: rgb(0, 175, 38);
+}

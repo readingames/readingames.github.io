@@ -1,0 +1,574 @@
+body{
+    background-color:rgb(219, 219, 219);
+    overflow-x:hidden;
+}
+img{
+    border-radius: 25px;
+}
+h1{
+    margin:0px
+}
+p{
+    margin-bottom:3%;
+}
+h3,p{
+    font-family: "Jaini", system-ui;
+    font-weight: 300;
+    font-style: normal;
+}
+header{
+    text-align: center;
+    font-size: clamp(48px,8vw,128px);
+    font-family: "ADLaM Display", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+.landingpage{
+    display:flex;
+    flex-direction: column;
+}
+.stuff{
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media(max-width:780px){
+    .stuff{
+        flex-direction: column;
+    }
+}
+p span{
+    animation: color 3s ease-in-out infinite alternate;
+    text-decoration: none;
+}
+@keyframes color{
+    0%{
+        color: rgb(63, 63, 63);
+    }
+    30%{
+        color: rgb(63, 63, 63);
+    }
+    70%{
+        color: rgb(0,175,38);
+    }
+    100%{
+        color: rgb(0,175,38);
+    }
+}
+span h1{
+    font-size:clamp(31px,7vw,86px);
+    color: rgb(33, 33, 33);
+}
+.left{
+    color: rgb(63, 63, 63);
+    margin-left: 5%;
+    margin-right: 5%;
+    font-family: "Jaini", system-ui;
+    font-weight: 300;
+    font-style: normal;
+    font-size: clamp(15px,3vw,28px);
+    text-align: left;
+    
+}
+.right{
+    text-align: right;
+}
+.btn {
+    display: inline-block; 
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    padding: 18px;
+    border-radius: 15px;
+    font-family: "ADLaM Display", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    transition: background-color 0.6s ease-in-out, color 0.6s ease-in-out, border-color 0.6s ease-in-out;
+}
+
+#login {
+    background-color: rgb(0,175,38);
+    color: white;
+    border: 3px solid rgb(0,175,38);
+}
+
+#login:hover {
+    background-color: rgb(218, 218, 218);
+    color: rgb(0,175,38);
+}
+
+#later {
+    background-color: transparent;
+    color: rgb(0,175,38);
+    border: 3px solid rgb(0,175,38);
+}
+
+#later:hover {
+    background-color: rgb(0,175,38);
+    color: white;
+}
+
+.floating{
+    position: absolute;
+    top: 0px;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+.floater{
+    position: absolute;
+    opacity: 0.6;
+}
+.float1{
+    width: 60px;
+    top: 50;
+    left: 50%;
+    animation: floatVertical 5s ease-in-out infinite alternate;
+}
+.float2{
+    width: 60px;
+    top: 5%;
+    left: 10%;
+    animation: floatHorizontal 6s ease-in-out infinite alternate;
+}
+.float3{
+    width: 60px;
+    top: 80%;
+    left: 30%;
+    animation: floatVertical 6s ease-in-out infinite alternate;
+}
+.float4{
+    width: 60px;
+    top: 13%;
+    left: 83%;
+    animation: floatHorizontal 7s ease-in-out infinite alternate;
+}
+.float5{
+    width: 60px;
+    top: 67%;
+    left: 0%;
+    animation: floatVertical 10s ease-in-out infinite alternate;
+}
+@keyframes floatVertical {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-30px) rotate(15deg);
+    }
+}
+
+@keyframes floatHorizontal {
+    0%, 100% { 
+        transform: translateX(0) translateY(0); 
+    }
+    50% { 
+        transform: translateX(-40px) translateY(-15px); 
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.info{
+    overflow: hidden;
+    margin-top: 5%;
+    background-color: rgb(197, 197, 197);
+}
+.info h1{
+    margin-top: 2%;
+    margin-bottom: 3%;
+    text-align: center;
+    font-size: 67px;
+    font-family: "ADLaM Display", system-ui;
+    font-weight: 300;
+    font-style: normal;
+}
+.gridsep{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4,1fr);
+}
+.seperator{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.seperator h3{
+    font-size: 55px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+.seperator p{
+    font-size: 30px;
+    text-align: center;
+    margin-top: 0px;
+    color: rgb(63, 63, 63);
+}
+.info div img{
+    margin-top: 5%;
+    margin-bottom: 0px;
+    width: 100%;
+    height: auto;
+    display:block;
+}
+#orbit{
+    animation: orbit 5s ease-in-out infinite alternate;
+}
+#fun{
+    animation: floatVertical 10s ease-in-out infinite alternate;
+}
+@keyframes orbit {
+    0%, 100% { 
+        transform: translateY(0) ; 
+    }
+    50% { 
+        transform: translateY(-30px) ;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.topics{
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    background-color: rgb(218, 218, 218);
+    padding: 10px;
+    border-radius: 13px;
+
+}
+@media(max-width:780px){
+    .topics{
+        flex-direction: column;
+    }
+}
+.imgcon{
+    margin-left: 5%;
+    position:relative;
+    width: 544px;
+    height: 784px;
+}
+.imgcon img{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: dropin 10s infinite;
+    margin:0;
+}
+.imgcon img:nth-child(2) {
+    animation-delay: 5.8s;
+}
+ul{
+    list-style-type: none;
+    margin: 0;            
+    padding: 0;          
+}
+.ideas{
+    margin-left: auto;
+    margin-right: 10%;
+    padding-right: 60px;
+}
+.ideas h1{
+    font-size: 80px;
+    font-family: "ADLaM Display", system-ui;
+    font-weight: 300;
+    font-style: normal;   
+}
+li{            
+    text-decoration: underline;
+    font-family: "Jaini", system-ui;
+    font-weight: 300;
+    font-style: normal;   
+    font-size: 44px; 
+    text-align: left;
+}
+@keyframes dropin {
+    0%   { opacity: 1; transform: translateY(-80px); }
+    10%  { opacity: 1; transform: translateY(0); }    
+    40%  { opacity: 1; transform: translateY(0); }    
+    50%  { opacity: 1; transform: translateY(0px); } 
+    60% { opacity: 0; transform: translateY(480px); } 
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contact {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: rgb(233, 233, 233);
+    font-family: "Jaini", system-ui;
+    color: rgb(33, 33, 33);
+}
+
+.contact h1 {
+    font-family: "ADLaM Display", system-ui;
+    color: rgb(0, 175, 38);
+    font-weight: 300;
+    font-size: 3rem;
+    margin-bottom: 40px;
+}
+
+.contactform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    gap: 25px;
+    padding: 40px;
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(237, 237, 237);
+}
+
+.contactform input, 
+.contactform textarea {
+    width: 100%;
+    padding: 18px;
+    border: 2px solid rgb(140, 140, 140);
+    border-radius: 15px;
+    font-family: "Jaini", system-ui;
+    font-size: 18px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.contactform input:focus, 
+.contactform textarea:focus {
+    outline: none;
+}
+
+.contactform textarea {
+    height: 150px;
+    resize: none;
+}
+.contactform .btn {
+    width: auto;
+    padding: 15px 40px;
+    font-family: "ADLaM Display", system-ui;
+    font-size: 24px;
+    background-color: rgb(0, 175, 38);
+    color: white;
+    border: 3px solid rgb(0, 175, 38);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    margin-top: 10px;
+}
+
+.contactform .btn:hover {
+    background-color: white;
+    color: rgb(0, 175, 38);
+    transform: scale(1.05);
+}
+
+.info {
+    overflow: hidden;
+    margin-top: 5%;
+    background-color: rgb(197, 197, 197);
+    padding-bottom: 60px;
+}
+
+.info h1 {
+    margin-top: 2%;
+    margin-bottom: 3%;
+    text-align: center;
+    font-size: 67px;
+    font-family: "ADLaM Display", system-ui;
+    font-weight: 300;
+}
+
+.gridsep {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+/* Create a unified circular container for each icon */
+.seperator {
+    background-color: rgb(218, 218, 218);
+    padding: 30px 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.seperator:hover {
+    transform: translateY(-5px);
+}
+
+/* Force all icons into a uniform size and give them a background circle container */
+.seperator img {
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 90px;
+    height: 90px;
+    padding: 20px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 50%; /* Makes them clean circles */
+    object-fit: contain;
+    display: block;
+}
+
+.seperator h3 {
+    font-size: 32px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.seperator p {
+    font-size: 18px;
+    margin-top: 0px;
+    color: rgb(63, 63, 63);
+}
+
+@media(max-width: 900px) {
+    .gridsep {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 580px) {
+    .gridsep {
+        grid-template-columns: 1fr;
+    }
+}
+#trophy{
+    max-width: 90%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    /* Background color removed so users can see through it */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /* Forces it to stack on top of everything else */
+    pointer-events: none; /* Lets clicks pass right through it to elements underneath if needed */
+}
+
+#loading-svg {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+    pointer-events: none; /* Prevents the object tag from interfering with clicks */
+}
+
+#story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed #ddd;
+    padding-bottom: 15px;
+}
+
+#story-title {
+    font-size: 42px;
+    color: black;
+    margin: 0;
+}
+
+#story-difficulty {
+    font-family: 'Jaini', cursive;
+    font-size: 32px;
+}
+
+#story-content {
+    font-family: 'Jaini', cursive;
+    font-size: 26px;
+    color: #333;
+    line-height: 1.6;
+}
+
+#story-content{
+    position: relative;
+}
+
+
+/* Class added via JS to fade out smoothly */
+.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+#loadingtext{
+    color: rgb(0, 175, 38);
+}

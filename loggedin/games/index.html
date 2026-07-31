@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadinGames - Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="games.css">
+</head>
+<body>
+    <div id="loggedin">
+        <!-- EXACT NAVIGATION BAR FROM YOUR STYLE -->
+        <nav>
+            <ul>
+                <li class="nav-item">
+                    <a href="/public/loggedin/"><img src="ReadinGames.png" alt="Home Page button"></a>
+                </li>
+                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
+                <!-- active-page class moved to Games -->
+                <li class="nav-item active-page"><a href="/public/loggedin/games">Games</a></li>
+                <li class="nav-item"><a href="/public/loggedin/merges">Merges</a></li>
+                <li class="nav-item"><a href="/public/loggedin/favourites">Favourites</a></li>
+                <li class="nav-item"><a href="/public/loggedin/submit">Submit</a></li>
+                <li class="nav-item"><a href="/public/loggedin/profile"><img src="defaultpfp.png" alt="Profile Picture">Profile</a></li>
+            </ul>
+        </nav>
+        
+        <!-- DASHBOARD VIEW -->
+        <div id="games-dashboard" class="view">
+            <div id="games-container">
+                <div class="games-header">
+                    <h1>Games</h1>
+                    <p>Note: Practicing questions help earn points</p>
+                </div>
+
+                <div class="games-grid">
+                    <!-- Game Card 1 -->
+                    <div class="game-card" onclick="openGame('cat-mouse')">
+                        <div class="game-info-popup">
+                            <div class="popup-thumb"></div>
+                            <p>Game description LOLGame description LOLGame description LOLGame description LOLb</p>
+                        </div>
+                    </div>
+
+                    <!-- Game Card 2 -->
+                    <div class="game-card" onclick="openGame('game-2')">
+                        <div class="game-info-popup">
+                            <div class="popup-thumb"></div>
+                            <p>Coming soon: Interactive vocabulary matching challenge!</p>
+                        </div>
+                    </div>
+
+                    <!-- Game Card 3 -->
+                    <div class="game-card" onclick="openGame('game-3')">
+                        <div class="game-info-popup">
+                            <div class="popup-thumb"></div>
+                            <p>Coming soon: Speed reading comprehension arcade game!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <!-- GAME PLAY VIEW (Hidden by default) -->
+        <div id="game-play-view" class="view hidden">
+            <div id="game-play-container">
+                <div class="game-play-header">
+                    <button id="back-to-games-btn" onclick="closeGame()">&#60; Back</button>
+                    <h2 id="active-game-title">Cat & Mouse Game</h2>
+                </div>
+                <div class="game-canvas-wrapper">
+                    <canvas id="game-canvas" width="800" height="450"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="games.js" type="module"></script>
+</body>
+</html>

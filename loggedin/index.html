@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadinGames</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="loggedin.css">
+</head>
+<body>
+    <div id="loggedin">
+        <nav>
+            <ul>
+                <li class="nav-item active-page">
+                    <a href="/public/loggedin/"><img src="ReadinGames.png" alt="Home Page button"></a>
+                </li>
+                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
+                <li class="nav-item"><a href="/public/loggedin/games">Games</a></li>
+                <li class="nav-item"><a href="/public/loggedin/merges">Merges</a></li>
+                <li class="nav-item"><a href="/public/loggedin/favourites">Favourites</a></li>
+                <li class="nav-item"><a href="/public/loggedin/submit">Submit</a></li>
+                <li class="nav-item"><a href="/public/loggedin/profile"><img src="defaultpfp.png" alt="Profile Picture">Profile</a></li>
+            </ul>
+        </nav>
+        
+        <div id="home-view" class="view">
+            <div id="left-cards-container">
+                <a href="/public/loggedin/streak" class="dashboard-card">
+                    <img src="streak.png" alt="Streak">
+                    <span>5 Day Streak</span>
+                </a>
+                <a href="/public/loggedin/daily" class="dashboard-card">
+                    <span>Daily Story</span>
+                </a>
+                <a href="/public/loggedin/recent" class="dashboard-card">
+                    <span>Recent Stories</span>
+                </a>
+            </div>
+            
+            <div id="recommend">
+                <h1>Recommendations</h1>
+                <div id="loading-overlay">
+                    <object data="loading.svg" type="image/svg+xml" id="loading-svg"></object>
+                </div>
+                <ul id="recommendation-list">
+
+                </ul>
+            </div>
+        </div>    
+    </div>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
