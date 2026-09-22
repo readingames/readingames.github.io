@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
     <style>
         /* Full screen overlay to center the spinner */
@@ -164,7 +165,20 @@
 
         @keyframes floatVertical { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(15deg); } }
         @keyframes floatHorizontal { 0%, 100% { transform: translateX(0) translateY(0); } 50% { transform: translateX(-40px) translateY(-15px); } }
-    </style>
+        @media (max-width: 768px) {
+            .left {
+                display: none;
+            }
+            .container {
+                gap: 0;
+                padding: 10px;
+            }
+            .outline-login {
+                font-size: clamp(40px, 10vw, 60px);
+                text-align: center;
+            }
+        }
+   </style>
 </head>
 <body>
     <div id="login">
@@ -185,6 +199,7 @@
                 <h1 class="outline-login">Log in/Sign Up</h1>
                 <input type="text" placeholder="Username" id="Username" required>
                 <input type="text" placeholder="Password" id="Password" required>
+                
                 <p  style="color: red; margin-top: 0px;" id="warning" hidden>*A minimum of 6 digits is required for the password</p>
                 <p  style="color: red; margin-top: 0px;" id="warning2" hidden>*The username or password is likely incorrect</p>
                 <button type="submit" id="btn">Log In</button>
@@ -270,10 +285,12 @@
                         readings: [],
                         games: [],
                         categories: [],
-                        streak: 0
+                        streak: 0,
+                        LP: 0,
+                        skins: ['skin1']
                     });
                     console.log('Account created!');
-                    window.location.href = "loggedin.html";
+                    window.location.href = "/loggedin";
                 } catch (createError) {
                     if (createError.code === 'auth/weak-password') {
                         document.getElementById('warning').hidden = false;

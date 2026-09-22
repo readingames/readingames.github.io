@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadinGames - Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="learning-points-badge">
+        <img src="../LearningP.png" alt="Learning Points Icon">
+        <span id="LP">0 LP</span>
+    </div>
+
+    <div id="loggedin">
+        <nav>
+            <ul>
+                <li class="nav-item">
+                    <a href="/public/loggedin/"><img src="../ReadinGames.png" alt="Home Page button"></a>
+                </li>
+                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
+                <li class="nav-item"><a href="/public/loggedin/games">Games</a></li>
+                <li class="nav-item active-page"><a href="/public/loggedin/shop">Shop</a></li>
+                <li class="nav-item"><a href="/public/loggedin/favourites">Favourites</a></li>
+                <li class="nav-item"><a href="/public/loggedin/submit">Submit</a></li>
+                <li class="nav-item"><a href="/public/loggedin/profile"><img src="../defaultpfp.png" alt="Profile Picture" id="profileimg">Profile</a></li>
+            </ul>
+        </nav>
+
+        <main id="shop-view">
+            <div class="shop-header">
+                <h1>Shop</h1>
+                <div id="refresh-btn">Next refresh: <span id="timer">Loading...</span></div>
+            </div>
+
+            <!-- JavaScript will inject the 6 items here -->
+            <div class="shop-grid" id="shop-grid"></div>
+        </main>
+    </div>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>

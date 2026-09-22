@@ -8,25 +8,68 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="learning-points-badge">
+    <style>
+        #learning-points-badge {
+            position: fixed;
+            top: 72px;
+            right: 32px;
+            background-color: white;
+            border: 3px solid #bbb;
+            border-radius: 10px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-family: 'Jaini', cursive;
+            font-size: 26px;
+            color: #ff751f;
+        }
+
+        #learning-points-badge img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+    </style>
+    <img src="../LearningP.png" alt="Learning Points Icon">
+    <span id="LP">LP</span>
+</div>
     <div id="loggedin">
         <nav>
             <ul>
-                <li class="nav-item active-page">
+                <li class="nav-item">
                     <a href="/public/loggedin/"><img src="ReadinGames.png" alt="Home Page button"></a>
                 </li>
-                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
+                <li class="nav-item active-page"><a href="/public/loggedin/practice">Practice</a></li>
                 <li class="nav-item"><a href="/public/loggedin/games">Games</a></li>
-                <li class="nav-item"><a href="/public/loggedin/merges">Merges</a></li>
+                <li class="nav-item"><a href="/public/loggedin/shop">Shop</a></li>
                 <li class="nav-item"><a href="/public/loggedin/favourites">Favourites</a></li>
                 <li class="nav-item"><a href="/public/loggedin/submit">Submit</a></li>
-                <li class="nav-item"><a href="/public/loggedin/profile"><img src="defaultpfp.png" alt="Profile Picture">Profile</a></li>
+                <li class="nav-item"><a href="/public/loggedin/profile"><img src="defaultpfp.png" alt="Profile Picture" id="profileimg">Profile</a></li>
             </ul>
         </nav>
         
         <div id="home-view" class="view">
             <div id="finder">
                 <h1>Find Problems</h1>
-                <input type="text" id="grade">
+                <label for="grade" id="category">Grade:</label>
+                <select name="grade" id="grade">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                </select>
                 <label for="categories" id="category">Category:</label>
                 <select name="categories" id="cars">
                 <option value="main-idea">Main Idea</option>
@@ -40,7 +83,7 @@
                 <option value="cause-and-effect">Cause and Effect</option>
                 <option value="sequence-of-events">Sequence of Events</option>
                 </select>
-                <input type="text" id="keyword">
+                <input type="text" id="keyword" placeholder="keyword">
                 <button id="search">Search</button>
             </div>
             
@@ -48,10 +91,9 @@
                 <h1>Readings</h1>
                 <div id="readings-wrapper" style="position: relative;">
                     <!-- Loading overlay is now a sibling to the list, trapped inside the wrapper box -->
-                    <div id="loading-overlay">
-                        <object data="loading.svg" type="image/svg+xml" id="loading-svg"></object>
-                    </div>
+                    
                     <ul id="readingslist"></ul>
+
                 </div>
             </div>
         </div>    

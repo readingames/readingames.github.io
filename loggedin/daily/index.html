@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #eeeeee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'ADLaM Display', cursive;
+        }
+
+        .redirect-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .redirect-container object {
+            width: 500px;
+            height: 500px;
+        }
+
+        .redirect-container h1 {
+            font-size: 32px;
+            color: #222;
+            margin: 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="redirect-container">
+        <object data="../loading.svg" type="image/svg+xml" id="loading-svg"></object>
+        <h1>Redirecting...</h1>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+        import { getFirestore, collection, query, orderBy, limit, getDocs} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHmjiEPPbZtfYDMQeyRYLg3wO8fGPO4iE",
+            authDomain: "readingames.firebaseapp.com",
+            projectId: "readingames",
+            storageBucket: "readingames.firebasestorage.app",
+            messagingSenderId: "135626039621",
+            appId: "1:135626039621:web:d0020d4265120de011de2c",
+            measurementId: "G-YXT9CZ6597"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app)
+        let currentUser = null
+        async function fetchLatestStoryAndRedirect() {
+            try {
+               
+                const q = query(collection(db, "stories"), orderBy("createdAt", "desc"), limit(1));
+                const querySnapshot = await getDocs(q);
+                console.log('sucess')
+                if (!querySnapshot.empty) {
+                    const latestDoc = querySnapshot.docs[0];
+                    const docId = latestDoc.id;
+                    
+                    window.location.href = `../../reader/index.html?id=${docId}`;
+                } else {
+                    console.error("No stories found in the database.");
+                    document.querySelector('h1').innerText = "No stories found!";
+                }
+            } catch (error) {
+                console.error("Error fetching latest story:", error);
+                document.querySelector('h1').innerText = "Redirect failed.";
+            }
+        }
+
+        // Run on page load
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                fetchLatestStoryAndRedirect();
+            }
+        });
+        
+    </script>
+</body>
+</html>

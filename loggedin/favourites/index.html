@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadinGames - Favourites</title>
+    <link rel="stylesheet" href="fav.css">
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="learning-points-badge">
+    <style>
+        #learning-points-badge {
+            position: fixed;
+            top: 72px;
+            right: 32px;
+            background-color: white;
+            border: 3px solid #3dae20;
+            border-radius: 10px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-family: 'Jaini', cursive;
+            font-size: 26px;
+            color: #ff751f;
+        }
+
+        #learning-points-badge img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+    </style>
+    <img src="../LearningP.png" alt="Learning Points Icon">
+    <span id="LP">LP</span>
+</div>
+    <div id="loggedin">
+        <!-- Navigation Bar -->
+        <nav>
+            <ul>
+                <li class="nav-item">
+                    <a href="../"><img src="../ReadinGames.png" alt="ReadinGames Logo"></a>
+                </li>
+                <li class="nav-item"><a href="../practice/">Practice</a></li>
+                <li class="nav-item"><a href="../games/">Games</a></li>
+                <li class="nav-item"><a href="../shop/">Shop</a></li>
+                <li class="nav-item active-page"><a href="./">Favourites</a></li>
+                <li class="nav-item"><a href="../submit/">Submit</a></li>
+                <li class="nav-item">
+                    <a href="../profile/"><img src="../defaultpfp.png" alt="Profile" id="profileimg"> Profile</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Favourites Layout -->
+        <div id="home-view">
+            <!-- Left Column: Favourite Readings & Vocabulary -->
+            <div id="left-cards-container">
+                <a href="#" class="dashboard-card">
+                    Favourite readings
+                </a>
+                <a href="../volcab/" class="dashboard-card">
+                    Volcabulary
+                </a>
+            </div>
+
+            <!-- Right Column: Favourite Game Section -->
+            <div id="favourite-game-container">
+                <img src="" alt="" class="game-box">
+                <h2 id="favstory">Favourite Game:</h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="fav.js" type="module"></script>
+</body>
+</html>

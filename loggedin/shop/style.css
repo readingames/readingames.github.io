@@ -1,0 +1,243 @@
+:root {
+    --accent: rgb(0, 175, 38);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: #ddd;
+    font-family: 'ADLaM Display', cursive;
+    overflow-x: hidden;
+}
+
+#loggedin {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Learning Points Badge --- */
+#learning-points-badge {
+    position: fixed;
+    top: 72px;
+    right: 32px;
+    background-color: white;
+    border: 3px solid #bbb;
+    border-radius: 10px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-family: 'Jaini', cursive;
+    font-size: 26px;
+    color: #ff751f;
+}
+
+#learning-points-badge img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* --- Navigation Bar --- */
+nav {
+    background-color: #ccc;
+    border-bottom: 4px solid var(--accent);
+    padding: 12px 32px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    transition: transform 0.15s ease;
+}
+
+.nav-item {
+    font-family: 'Jaini', cursive;
+    font-size: 30px;
+    color: black;
+    margin: 0 20px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 4px 8px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+}
+
+.nav-item:hover {
+    color: var(--accent);
+    transition: transform 0.15s ease;
+    transform: scale(1.05);
+}
+
+.active-page {
+    border-color: var(--accent);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Logo on the far left */
+.nav-item:first-child {
+    margin-right: auto;
+    border: 2px solid transparent;
+}
+
+.nav-item:first-child img {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Profile on the far right */
+.nav-item:last-child {
+    margin-left: 24px;
+    margin-right: 8px;
+    font-family: 'ADLaM Display', cursive;
+    font-size: 24px;
+    gap: 12px;
+}
+
+.nav-item:last-child img {
+    width: 52px;
+    height: 52px; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* --- Main Shop Layout --- */
+#shop-view {
+    padding: 30px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Header Row (Title & Refresh Button) */
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shop-header h1 {
+    font-size: 52px;
+    color: black;
+    margin: 0;
+}
+
+#refresh-btn {
+    background-color: var(--accent);
+    color: white;
+    font-family: 'ADLaM Display', cursive;
+    font-size: 26px;
+    padding: 12px 28px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: opacity 0.2s ease;
+}
+
+#refresh-btn:hover {
+    opacity: 0.9;
+}
+/* Update your grid slightly to fit the new dynamic cards */
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    justify-items: center;
+}
+
+.shop-card {
+    background-color: #eeeeee;
+    width: 100%;
+    max-width: 280px;
+    height: 260px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+/* Container set to relative so the absolute button stays inside */
+.card-img-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    border-radius: 8px;
+    border: 3px solid #ccc;
+}
+
+.shop-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* The fixed button overlaying the bottom of the image */
+.buy-btn {
+    position: absolute;
+    bottom: -15px; /* Pulls it down to straddle the border */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent);
+    color: white;
+    font-family: 'ADLaM Display', cursive;
+    font-size: 18px;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.buy-btn:active {
+    transform: translateX(-50%) translateY(2px);
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+
+.buy-btn:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.rarity {
+    font-family: 'ADLaM Display', cursive;
+    font-size: 26px;
+    margin-top: 20px;
+}
+
+/* Rarity Colors for visual flair */
+.rarity-Common { color: #27bef4; }
+.rarity-Uncommon { color: #21a859; }
+.rarity-Epic { color: #7f389b; }
+.rarity-Legendary { color: #f1c40f; }

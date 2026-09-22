@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Rat Escape</title>
+  <link rel="shortcut icon" type="image/x-icon" href="cheese.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Press+Start+2P&family=Tiny5&display=swap" rel="stylesheet">
+  <script src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>
+</head>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+  }
+
+  #game-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    position: relative; /* Keep absolute overlays relative to this container */
+  }
+
+  canvas {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
+    touch-action: none; 
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    body::before {
+        content: "Please rotate your device to play!";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: black;
+        color: white;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Anton', sans-serif;
+        font-size: 24px;
+    }
+    canvas {
+        display: none;
+    }
+  }
+
+  #ui-layer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    text-align: right;
+    font-family: 'Tiny5';
+    pointer-events: none;
+  }
+
+  .stat-label {
+    color: white;
+    font-size: 24px;
+    margin: 5px 0;
+    text-transform: uppercase;
+  }
+
+  #lives {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    margin-top: 5%;
+  }
+
+  /* --- FIXED LEADERBOARD OVERLAY BOX --- */
+  #leaderboard-overlay {
+    display: none; 
+    position: absolute; 
+    /* Positioned cleanly below your "Leaderboard" text rendered at 44.4% height */
+    top: 52%; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 420px;
+    z-index: 100;
+    
+    /* FIX: Clicks pass right through the empty container space to the canvas buttons */
+    pointer-events: none; 
+  }
+
+  #leaderboard {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+  }
+
+  #leaderboard li {
+    opacity: 0.9;
+    background: rgb(14, 18, 126);
+    margin: 6px 0;
+    font-size: 12px; /* Balanced sizing for classic arcade boards */
+    padding: 6px 12px;
+    border-radius: 5px;
+    display: flex;
+    color: white;
+    font-family: 'Press Start 2P';
+    justify-content: space-between;
+  }
+
+  /* Mouse UI styles kept intact */
+  .icon-wrapper { position: relative; width: 20px; height: 20px; margin-top: 10px; }
+  .icon-wrapper div { position: absolute; border-radius: 50%; }
+  .life-icon { width: 20px; height: 20px; background-color: gray; top: 0; left: 0; }
+  .leftmouseears { width: 13px; height: 13px; background-color: gray; top: -5px; left: -6px; }
+  .rightmouseears { width: 13px; height: 13px; background-color: gray; top: -5px; right: -6px; }
+  .leftmouseearsin { width: 8px; height: 8px; background-color: pink; top: -2px; left: -3px; z-index: 1; }
+  .rightmouseearsin { width: 8px; height: 8px; background-color: pink; top: -2px; right: -3px; z-index: 1; }
+  .mouseeyeleft { width: 8px; height: 8px; background-color: white; top: 4px; left: 1px; }
+  .mouseeyeright { width: 8px; height: 8px; background-color: white; top: 4px; right: 1px; }
+  .mouseeyeleftin { width: 5px; height: 5px; background-color: black; top: 4px; left: -0.5px; z-index: 2; }
+  .mouseeyerightin { width: 5px; height: 5px; background-color: black; top: 4px; right: 3.5px; z-index: 2; }
+  #points { color: yellow; } 
+</style>
+<body>
+
+<div id="game-container">
+    <div id="start-screen" style="
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 200;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;">
+        
+        <h1 style="font-family: 'Press Start 2P', sans-serif; color: #ffffff; font-size: 32px; margin-bottom: 30px; text-align: center;">RAT ESCAPE</h1>
+        <p style="font-family: 'Press Start 2P', sans-serif; color: rgb(255, 255, 0); font-size: 16px; animation: blink 1.2s infinite; text-align: center;">CLICK ANYWHERE TO PLAY</p>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+    
+    <div id="leaderboard-overlay">
+        <ul id="leaderboard"></ul>
+    </div>
+
+    <div id="ui-layer" hidden>
+        <div id="levels" class="stat-label">Level: 0</div>
+        <div id="lives" class="stat-label">Lives: </div>
+        <div id='points' class="stat-label">Points: 0</div>
+    </div>
+</div>
+
+<style>
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+
+<script>
+  window.currentGameState = 'INTRO';
+</script>
+<script src="open.js"></script>
+<script type="module" src="script.js"></script>
+</body>
+</html>

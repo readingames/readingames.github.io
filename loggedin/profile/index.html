@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+    <!-- Include your Firebase SDK scripts here -->
+</head>
+<body>
+<!-- Back to Home Button -->
+<a href="../index.html" class="back-home-btn">← Back to Home</a>
+    <div class="profile-wrapper">
+        
+        <!-- Left Column (Avatar & Basic Stats) -->
+        <div class="profile-sidebar">
+            <div id="profile-icon">
+                
+                <img src="../defaultpfp.png" alt="Profile Picture" class="profile-avatar" id="profile-img">
+                <div class="overlay"><img src="../camera.png" alt="click to change pfp" id="change"></div>
+            </div>
+            
+            <h2 id="profile-name">Name Name</h2>
+            <div class="sidebar-stat">Completed Lessons: <span id="stat-lessons">0</span></div>
+            <div class="sidebar-stat">Total Points: <span id="stat-points">0</span></div>
+            <div class="sidebar-stat">Current Streak: <span id="stat-streak">0</span></div>
+        </div>
+
+        <!-- Right Column (Achievements & Detailed Stats) -->
+        <div class="profile-content">
+            
+            <!-- Achievements Panel -->
+            <div class="panel achievements-panel">
+                <a href="#" class="view-all-link">All Achievements</a>
+                
+                <div class="achievements-grid" id="achievements-grid">
+                    <!-- Default 6 image slots matching the wireframe -->
+                    
+                </div>
+            </div>
+
+            <!-- Detailed Stats Panel -->
+            <div class="panel detailed-stats-panel">
+                <div class="detail-stat">Total problems: <span id="stat-problems">0</span></div>
+                <div class="detail-stat">Accuracy: <span id="stat-accuracy">0%</span></div>
+                <div class="detail-stat">Strongest topic: <span id="stat-topic">N/A</span></div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="sidebar-hidden" id="skin">
+        <div id="skins">
+            <h1>Skins</h1>
+            <div id="divider"></div>
+        </div>
+        <div id="locked">
+            <h1>Locked</h1>
+            <div id="divider"></div>
+        </div>
+    </div>
+    <script type="module" src="profile.js"></script>
+</body>
+</html>

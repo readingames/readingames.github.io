@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-import { getFirestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc,setDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 const firebaseConfig = {
     apiKey: "AIzaSyBHmjiEPPbZtfYDMQeyRYLg3wO8fGPO4iE",
@@ -23,7 +23,47 @@ let activeTool = null;
 
 onAuthStateChanged(auth, (user) => {
     currentUser = user;
+    if (user) {
+        updateLPDisplay(); 
+        loadprofile()
+    }
 });
+const skinss = {
+    "skin1": "../loggedin/defaultpfp.png" ,
+    "skin2": "../loggedin/2.png" ,
+    "skin3": "../loggedin/4.png" ,
+    "skin4": "../loggedin/3.png" ,
+    "skin5": "../loggedin/cry.png" ,
+    "skin6": "../loggedin/1.png" ,
+    "skin7": "../loggedin/buff.png" ,
+    "skin8": "../loggedin/5.png" ,
+    "skin9": "../loggedin/leet.png" ,
+    "skin10": "../loggedin/6.png" 
+};
+async function loadprofile(){
+    if (!currentUser) return;
+    
+    // 1. Optimistic Cache Load
+    const cachedSkin = localStorage.getItem(`equippedSkin_${currentUser.uid}`);
+    if (cachedSkin) {
+        document.getElementById('profileimg').src = skinss[cachedSkin] || skinss['skin1'];
+    }
+
+    // 2. Background Database Fetch
+    try {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+            const currentskin = userSnap.data().equippedSkin || 'skin1';
+            document.getElementById('profileimg').src = skinss[currentskin];
+            // Update cache with freshest data
+            localStorage.setItem(`equippedSkin_${currentUser.uid}`, currentskin); 
+        }
+    } catch (e) {
+        console.error("Error fetching skin:", e);
+    }
+}
+
 
 // A helper function to wrap every single word in an invisible span for the hover effects
 function wrapWordsForInteraction(text) {
@@ -93,33 +133,263 @@ function renderQuestion(index) {
     const progressPercentage = (index / currentStoryData.questions.length) * 100;
     document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
 }
+const difficultyMap = {
+  "Hard": 3,
+  "Medium": 2,
+  "Easy": 1
+};
+async function updateLPDisplay() {
+    if (!currentUser) return;
 
-document.getElementById('submit-answer-btn').addEventListener('click', async () => {
+    // 1. Optimistic Cache Load
+    const cachedLP = localStorage.getItem(`LP_${currentUser.uid}`);
+    if (cachedLP !== null) {
+        document.getElementById('LP').innerText = `${cachedLP} LP`;
+    }
+
+    // 2. Background Database Fetch
+    try {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+            const currentLP = userSnap.data().LP || 0;
+            document.getElementById('LP').innerText = `${currentLP} LP`;
+            // Update cache with freshest data
+            localStorage.setItem(`LP_${currentUser.uid}`, currentLP); 
+        }
+    } catch (e) {
+        console.error("Error fetching LP:", e);
+    }
+}
+let sessionCategoryUpdates = [];
+const submitBtn = document.getElementById('submit-answer-btn');
+
+submitBtn.addEventListener('click', async () => {
     if (!selectedOptionText) {
         alert("Please select an answer first.");
         return;
     }
+
+    // 1. INSTANTLY DISABLE BUTTON TO PREVENT SPAM CLICKING
+    submitBtn.disabled = true;
 
     const qData = currentStoryData.questions[currentQuestionIndex];
     const isCorrect = (selectedOptionText === qData.correct_answer);
     
     if (isCorrect) userScore++;
 
+    // 2. TRACK CATEGORY LOCALLY INSTEAD OF FETCHING DATABASE
     if (currentUser && qData.category) {
-        await updateCategoryData(qData.category, isCorrect);
+        sessionCategoryUpdates.push({
+            category: qData.category,
+            isCorrect: isCorrect
+        });
     }
 
     if (currentQuestionIndex < currentStoryData.questions.length - 1) {
         currentQuestionIndex++;
         renderQuestion(currentQuestionIndex);
+        
+        // 3. RE-ENABLE BUTTON ONCE NEXT QUESTION IS RENDERED
+        submitBtn.disabled = false; 
     } else {
         document.getElementById('progress-bar').style.width = `100%`;
         document.getElementById('quiz-section').classList.add('hidden');
         document.getElementById('final-score-screen').classList.remove('hidden');
         document.getElementById('final-score-text').innerText = `${userScore} / ${currentStoryData.questions.length}`;
+        
+        if (currentUser) {
+            try {
+                const userRef = doc(db, "users", currentUser.uid);
+                const userSnap = await getDoc(userRef);
+                
+                if (userSnap.exists()) {
+                    let userData = userSnap.data();
+                    
+                    let readingHistory = userData.readingHistory || {}; 
+                    let achievements = userData.achievements || [];
+                    let points = userData.LP || 0;
+                    let grade = userData.grade || 0;
+                    let streak = userData.streak || 0;
+                    let lastLoginStr = userData.lastLogin || null;
+                    
+                    // Grab the user's existing categories
+                    let userCategories = userData.category || []; 
+
+                    const params = new URLSearchParams(window.location.search);
+                    const storyId = params.get('id');
+
+                    // 1. Add storyid to readings
+                    if (storyId) {
+                        if (readingHistory[storyId]) {
+                            readingHistory[storyId] += 1;
+                        } else {
+                            readingHistory[storyId] = 1;
+                        }
+                    }
+
+                    // 2. Add LP (ONLY if > 50%)
+                    const scorePercentage = userScore / currentStoryData.questions.length;
+                    if (scorePercentage > 0.5) {
+                        const difficulty = currentStoryData.difficulty || "Easy";
+                        const diffMultiplier = difficultyMap[difficulty] || 1; 
+                        const pointsEarned = (diffMultiplier * 5) + (grade * 10);
+                        points += pointsEarned;
+                        
+                        showLPAnimation(pointsEarned);
+                    }
+
+                    // 3. Check daily streak
+                    const todayDate = new Date();
+                    const todayStr = todayDate.toDateString(); 
+                    let oldStreak = streak;
+                    
+                    if (lastLoginStr !== todayStr) {
+                        if (lastLoginStr) {
+                            const lastLoginDate = new Date(lastLoginStr);
+                            todayDate.setHours(0,0,0,0);
+                            lastLoginDate.setHours(0,0,0,0);
+                            
+                            const diffTime = todayDate - lastLoginDate;
+                            const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                            
+                            if (diffDays === 1) {
+                                streak += 1;
+                            } else if (diffDays > 1) {
+                                streak = 1;
+                            }
+                        } else {
+                            streak = 1; 
+                        }
+                    }
+
+                    if (streak > oldStreak) {
+                        setTimeout(() => showStreakAnimation(streak), 500); 
+                    }
+
+                    // 4. Check achievements
+                    const totalReadings = Object.values(readingHistory).reduce((sum, count) => sum + count, 0);
+                    if (totalReadings >= 1 && !achievements.includes("one")) achievements.push("one");
+                    if (totalReadings >= 5 && !achievements.includes("five")) achievements.push("five");
+                    if (totalReadings >= 10 && !achievements.includes("ten")) achievements.push("ten");
+                    if (totalReadings >= 20 && !achievements.includes("twenty")) achievements.push("twenty");
+                    if (totalReadings >= 50 && !achievements.includes("fifty")) achievements.push("fifty");
+
+                    // 5. BATCH PROCESS ALL CATEGORIES
+                    sessionCategoryUpdates.forEach(update => {
+                        let foundIndex = -1;
+                        let right = 0, wrong = 0;
+                        
+                        for (let i = 0; i < userCategories.length; i++) {
+                            const parts = userCategories[i].split('-');
+                            const w = parseInt(parts.pop());
+                            const r = parseInt(parts.pop());
+                            const name = parts.join('-');
+                            
+                            if (name === update.category) {
+                                foundIndex = i;
+                                right = r;
+                                wrong = w;
+                                break;
+                            }
+                        }
+                        
+                        if (update.isCorrect) right++; else wrong++;
+                        const newString = `${update.category}-${right}-${wrong}`;
+                        
+                        if (foundIndex > -1) {
+                            userCategories[foundIndex] = newString;
+                        } else {
+                            userCategories.push(newString);
+                        }
+                    });
+
+                    // 6. Push ALL updates in a SINGLE network call
+                    await setDoc(userRef, { 
+                        readingHistory: readingHistory,
+                        LP: points,
+                        streak: streak,
+                        lastLogin: todayStr,
+                        achievements: achievements,
+                        category: userCategories // Included batch categories here!
+                    }, { merge: true });
+                    
+                    document.getElementById('LP').innerText = `${points} LP`;
+
+                    localStorage.setItem(`LP_${currentUser.uid}`, points);
+                    localStorage.setItem(`streak_${currentUser.uid}`, streak);
+                    
+                }
+            } catch (error) {
+                console.error("Error updating user stats:", error);
+            } finally {
+                // Ensure button is usable again if they navigate back
+                submitBtn.disabled = false;
+            }
+        }
     }
 });
 
+// --- ANIMATION HELPER FUNCTIONS ---
+
+function showLPAnimation(amount) {
+    const anim = document.createElement('div');
+    anim.innerText = `+${amount} LP!`;
+    
+    // Styling for a bold, glowing pop-up
+    anim.style.cssText = `
+        position: fixed; top: 40%; left: 50%; transform: translate(-50%, -50%);
+        font-size: 3rem; font-weight: 900; color: #ff9800; font-family: sans-serif;
+        text-shadow: 2px 2px 0px #fff, 0px 4px 10px rgba(255, 152, 0, 0.5);
+        z-index: 10000; pointer-events: none; opacity: 0;
+    `;
+    document.body.appendChild(anim);
+    
+    // JS Native Animation
+    anim.animate([
+        { opacity: 0, transform: 'translate(-50%, -20%) scale(0.5)' },
+        { opacity: 1, transform: 'translate(-50%, -50%) scale(1.2)', offset: 0.2 },
+        { opacity: 1, transform: 'translate(-50%, -50%) scale(1)', offset: 0.8 },
+        { opacity: 0, transform: 'translate(-50%, -80%) scale(1)' }
+    ], { 
+        duration: 2500, 
+        easing: 'ease-out' 
+    }).onfinish = () => anim.remove();
+}
+
+function showStreakAnimation(newStreak) {
+    const anim = document.createElement('div');
+    
+    // Determine which image to show based on the tier
+    let imgSrc = '../loggedin/1day.png'; // fallback
+    if (newStreak >= 10) imgSrc = '../loggedin/10days.png';
+    else if (newStreak >= 5) imgSrc = '../loggedin/2days.png';
+    else if (newStreak >= 1) imgSrc = '../loggedin/1day.png';
+    
+    anim.innerHTML = `
+        <img src="${imgSrc}" style="width: 80px; height: 80px; object-fit: contain;">
+        <div style="font-size: 1.5rem; font-weight: bold; color: #00af26; font-family: sans-serif; margin-top: 10px;">
+            ${newStreak} Day Streak!
+        </div>
+    `;
+    
+    anim.style.cssText = `
+        position: fixed; top: 60%; left: 50%; transform: translate(-50%, -50%);
+        text-align: center; z-index: 10000; pointer-events: none; opacity: 0;
+    `;
+    document.body.appendChild(anim);
+
+    // Bouncy pop-in animation
+    anim.animate([
+        { opacity: 0, transform: 'translate(-50%, -50%) scale(0.1) rotate(-15deg)' },
+        { opacity: 1, transform: 'translate(-50%, -50%) scale(1.3) rotate(5deg)', offset: 0.4 },
+        { opacity: 1, transform: 'translate(-50%, -50%) scale(1) rotate(0deg)', offset: 0.8 },
+        { opacity: 0, transform: 'translate(-50%, -50%) scale(1.2)' }
+    ], { 
+        duration: 3000, 
+        easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)' 
+    }).onfinish = () => anim.remove();
+}
 async function updateCategoryData(categoryName, isCorrect) {
     try {
         const userRef = doc(db, "users", currentUser.uid);

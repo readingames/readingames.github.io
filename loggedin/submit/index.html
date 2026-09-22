@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadinGames - Submit</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Learning Points Badge -->
+    <div id="learning-points-badge">
+        <img src="../LearningP.png" alt="Learning Points Icon">
+        <span id="LP">0 LP</span>
+    </div>
+
+    <div id="loggedin">
+        <!-- Navigation Bar -->
+        <nav>
+            <ul>
+                <li class="nav-item">
+                    <a href="/public/loggedin/"><img src="../ReadinGames.png" alt="Home Page button"></a>
+                </li>
+                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
+                <li class="nav-item"><a href="/public/loggedin/games">Games</a></li>
+                <li class="nav-item"><a href="/public/loggedin/shop">Shop</a></li>
+                <li class="nav-item"><a href="/public/loggedin/favourites">Favourites</a></li>
+                <!-- Submit is active on this page -->
+                <li class="nav-item active-page"><a href="/public/loggedin/submit">Submit</a></li>
+                <li class="nav-item"><a href="/public/loggedin/profile"><img src="../defaultpfp.png" alt="Profile Picture" id="profileimg">Profile</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Submit View -->
+        <main id="submit-view">
+            <div class="submit-container">
+                
+                <!-- Formspree Form Wrapper -->
+                <form id="submit-form" action="https://formspree.io/f/mqeverbd" method="POST" class="submit-form-grid">
+                    
+                    <!-- Left Column: Title & Text Inputs -->
+                    <div class="submit-left">
+                        <h1>Submit</h1>
+                        <p class="submit-desc">Submit your writings, games, or suggestions for a contribution award!</p>
+                        
+                        <div class="input-group">
+                            <input type="text" name="title_or_name" placeholder="Title / Your Name" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Textarea & Big Submit Button -->
+                    <div class="submit-right">
+                        <p class="email-note">Game files can be mailed to <strong>jasperhung888@gmail.com</strong></p>
+                        
+                        <div class="textarea-group">
+                            <textarea name="message" placeholder="Type your writing, suggestion, or links here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-action-btn">Submit</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </main>
+        
+    </div>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>

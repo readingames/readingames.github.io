@@ -3,77 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReadinGames - Games</title>
-    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <title>Games Dashboard</title>
     <link rel="stylesheet" href="games.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="loggedin">
-        <!-- EXACT NAVIGATION BAR FROM YOUR STYLE -->
-        <nav>
-            <ul>
-                <li class="nav-item">
-                    <a href="/public/loggedin/"><img src="ReadinGames.png" alt="Home Page button"></a>
-                </li>
-                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
-                <!-- active-page class moved to Games -->
-                <li class="nav-item active-page"><a href="/public/loggedin/games">Games</a></li>
-                <li class="nav-item"><a href="/public/loggedin/merges">Merges</a></li>
-                <li class="nav-item"><a href="/public/loggedin/favourites">Favourites</a></li>
-                <li class="nav-item"><a href="/public/loggedin/submit">Submit</a></li>
-                <li class="nav-item"><a href="/public/loggedin/profile"><img src="defaultpfp.png" alt="Profile Picture">Profile</a></li>
-            </ul>
-        </nav>
-        
-        <!-- DASHBOARD VIEW -->
-        <div id="games-dashboard" class="view">
-            <div id="games-container">
-                <div class="games-header">
-                    <h1>Games</h1>
-                    <p>Note: Practicing questions help earn points</p>
-                </div>
+<div id="learning-points-badge">
+    <style>
+        #learning-points-badge {
+            position: fixed;
+            top: 72px;
+            right: 32px;
+            background-color: white;
+            border: 3px solid #bbb;
+            border-radius: 10px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-family: 'Jaini', cursive;
+            font-size: 26px;
+            color: #ff751f;
+        }
 
-                <div class="games-grid">
-                    <!-- Game Card 1 -->
-                    <div class="game-card" onclick="openGame('cat-mouse')">
-                        <div class="game-info-popup">
-                            <div class="popup-thumb"></div>
-                            <p>Game description LOLGame description LOLGame description LOLGame description LOLb</p>
-                        </div>
-                    </div>
+        #learning-points-badge img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+    </style>
+    <img src="../LearningP.png" alt="Learning Points Icon">
+    <span id="LP">LP</span>
+</div>
+<div id="loggedin">
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <a href="../index.html" class="nav-item">
+                <img src="../ReadinGames.png" alt="Logo">
+            </a>
+            <a href="../practice/" class="nav-item">Practice</a>
+            <a href="../games/" class="nav-item active-page">Games</a>
+            <a href="../shop" class="nav-item">Shop</a>
+            <a href="../favourites/" class="nav-item">Favourites</a>
+            <a href="../submit/" class="nav-item">Submit</a>
+            <a href="../profile/" class="nav-item">
+                <img src="../defaultpfp.png" alt="Profile" id="profileimg">
+            </a>
+        </ul>
+    </nav>
 
-                    <!-- Game Card 2 -->
-                    <div class="game-card" onclick="openGame('game-2')">
-                        <div class="game-info-popup">
-                            <div class="popup-thumb"></div>
-                            <p>Coming soon: Interactive vocabulary matching challenge!</p>
-                        </div>
-                    </div>
 
-                    <!-- Game Card 3 -->
-                    <div class="game-card" onclick="openGame('game-3')">
-                        <div class="game-info-popup">
-                            <div class="popup-thumb"></div>
-                            <p>Coming soon: Speed reading comprehension arcade game!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        
-        <!-- GAME PLAY VIEW (Hidden by default) -->
-        <div id="game-play-view" class="view hidden">
-            <div id="game-play-container">
-                <div class="game-play-header">
-                    <button id="back-to-games-btn" onclick="closeGame()">&#60; Back</button>
-                    <h2 id="active-game-title">Cat & Mouse Game</h2>
-                </div>
-                <div class="game-canvas-wrapper">
-                    <canvas id="game-canvas" width="800" height="450"></canvas>
-                </div>
-            </div>
+    <div id="games-dashboard" class="view">
+        <div class="games-header">
+            <h1>Games</h1>
+            <p>Note: Practicing questions help earn points</p>
+        </div>
+
+        <!-- Empty Grid: JavaScript will automatically inject the catalog here -->
+        <div class="games-grid"></div>
+    </div>
+
+
+    <!-- Active Gameplay View (Hidden by default) -->
+    <div id="game-play-view" class="view hidden">
+        <div class="game-play-header">
+            <button id="back-to-games-btn" onclick="closeGame()">← Back to Games</button>
+            <h2 id="active-game-title">Game Title</h2>
+        </div>
+
+        <div class="game-canvas-wrapper">
+            <iframe 
+                id="game-iframe" 
+                src="" 
+                style="width: 100%; height: 100%; border: none; border-radius: 8px;"
+                allow="autoplay">
+            </iframe>
         </div>
     </div>
-    <script src="games.js" type="module"></script>
+</div>
+
+<!-- Main Script (Module type required for Firebase imports) -->
+<script type="module" src="games.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,178 @@
+:root {
+    --accent: rgb(0, 175, 38);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: #ddd;
+    font-family: 'ADLaM Display', cursive;
+    overflow: hidden;
+}
+
+#loggedin {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #ccc;
+    border-bottom: 4px solid var(--accent);
+    padding: 12px 32px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    transition: transform 0.15s ease;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+/* Navbar Items & Underlines */
+.nav-item {
+    font-family: 'Jaini', cursive;
+    font-size: 30px;
+    color: black;
+    margin: 0 20px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 4px 8px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+}
+
+.nav-item:hover {
+    color: var(--accent);
+    transition: transform 0.15s ease;
+    transform: scale(1.05);
+}
+
+/* Active Page Highlight */
+.active-page {
+    border-color: var(--accent);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Logo on the far left */
+.nav-item:first-child {
+    margin-right: auto;
+    border: 2px solid transparent;
+}
+
+.active-page:first-child {
+    border-color: var(--accent);
+}
+
+.nav-item:first-child img {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Profile on the far right */
+.nav-item:last-child {
+    margin-left: 24px;
+    margin-right: 8px;
+    font-family: 'ADLaM Display', cursive;
+    font-size: 24px;
+    gap: 12px;
+}
+
+.nav-item:last-child img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Main Favourites View Layout */
+#home-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+    flex-grow: 1;
+    padding: 32px;
+}
+
+/* Left Side Cards Container */
+#left-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 440px;
+}
+
+/* Individual Favourites Cards */
+.dashboard-card {
+    background: white;
+    border: 3px solid #bbb;
+    border-radius: 12px;
+    padding: 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-size: 40px;
+    font-family: 'ADLaM Display', cursive;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+/* Right Side Favourite Game Section */
+#favourite-game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.game-box {
+    width: 360px;
+    height: 360px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Big X Graphic inside the Game Box matching your sketch */
+.game-box::before,
+.game-box::after {
+    content: '';
+    position: absolute;
+}
+
+.game-box::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+}
+
+#favourite-game-container h2 {
+    font-family: 'ADLaM Display', cursive;
+    font-size: 36px;
+    color: black;
+    margin: 0;
+}

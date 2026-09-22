@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadinGames - Vocabulary</title>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Jaini&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="volcab.css">
+</head>
+<body>
+
+    <!-- Learning Points Badge -->
+    <div id="learning-points-badge">
+        <img src="../LearningP.png" alt="Learning Points Icon">
+        <span id="LP">0 LP</span>
+    </div>
+
+    <div id="loggedin">
+        <!-- Navigation Bar -->
+        <nav>
+            <ul>
+                <li class="nav-item">
+                    <a href="/public/loggedin/"><img src="../ReadinGames.png" alt="Home Page button"></a>
+                </li>
+                <li class="nav-item"><a href="/public/loggedin/practice">Practice</a></li>
+                <li class="nav-item"><a href="/public/loggedin/games">Games</a></li>
+                <li class="nav-item"><a href="/public/loggedin/shop">Shop</a></li>
+                <li class="nav-item"><a href="/public/loggedin/favourites">Favourites</a></li>
+                <li class="nav-item"><a href="/public/loggedin/submit">Submit</a></li>
+                <!-- Vocabulary is active on this page -->
+                <li class="nav-item active-page"><a href="/public/loggedin/vocabulary">Vocabulary</a></li>
+                <li class="nav-item"><a href="/public/loggedin/profile"><img src="../defaultpfp.png" alt="Profile Picture" id="profileimg">Profile</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Vocabulary View -->
+        <main id="vocabulary-view">
+            <div class="vocabulary-container">
+                <h1>Vocabulary</h1>
+                <div id="vocabulary-grid" class="vocabulary-grid">
+                    <!-- Dynamic word cards will be populated here -->
+                </div>
+            </div>
+        </main>
+        
+    </div>
+
+    <script src="volcab.js" type="module"></script>
+</body>
+</html>
