@@ -279,7 +279,7 @@ async function loadRecommendations() {
             
             li.addEventListener('click', () => {
                 console.log("Opening story:", item.id);
-                window.location.href = `/public/reader/index.html?id=${item.id}`;
+                window.location.href = `/reader/index.html?id=${item.id}`;
             });
 
             listElement.appendChild(li);
