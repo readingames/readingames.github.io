@@ -65,7 +65,7 @@ async function loadRecommendations(filterGrade = null, filterCategory = null, ke
                     li.innerHTML = `<span style="cursor:pointer; color: rgb(0, 175, 38);">${story.passage_title}</span> - <span style='color: ${col}'>${gradeDisplay} - ${story.difficulty}</span>`; 
                     
                     li.addEventListener('click', () => { 
-                        window.location.href = `/public/reader/index.html?id=${story.id}`; 
+                        window.location.href = `/reader/index.html?id=${story.id}`; 
                     }); 
                     
                     listElement.appendChild(li); 
@@ -142,7 +142,7 @@ async function loadRecommendations(filterGrade = null, filterCategory = null, ke
             li.innerHTML = `<span style="cursor:pointer; color: rgb(0, 175, 38);">${data.passage_title}</span> - <span style='color: ${col}'>${gradeDisplay}</span>`;
             
             li.addEventListener('click', () => {
-                window.location.href = `/public/reader/index.html?id=${docSnap.id}`;
+                window.location.href = `/reader/index.html?id=${docSnap.id}`;
             });
 
             listElement.appendChild(li);
